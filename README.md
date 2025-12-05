@@ -23,6 +23,6 @@ systems you own or have explicit permission to test.
 
 - python wwwizard.py --brute http://example.com -w wordlist.txt --data "user=admin&password=$psswrd"
 
-- python wwwizard.py --fuzzer http://example.com -w wordlist.txt
+- python wwwizard.py --fuzzing http://example.com -w wordlist.txt
 
 
