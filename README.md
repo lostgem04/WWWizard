@@ -13,9 +13,9 @@ this toolkit is intended **only for authorized security testing** on
 systems you own or have explicit permission to test.
 
 ## Installation
-git clone https://github.com/lostgem04/WWWizard.git
-cd WWWizard
-pip install -r requirements.txt
+- git clone https://github.com/lostgem04/WWWizard.git
+- cd WWWizard
+- pip install -r requirements.txt
 
 ## Usage
 
