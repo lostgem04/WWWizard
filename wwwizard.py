@@ -207,12 +207,15 @@ def main():
 
 def connection(url,timeout):
         print(f"{INFO} Connecting to : {url}")
+        if not url.startswith("https://") or url.startswith("http://"):
+                url = "https://"+url
         try:
+                urlpaths = "https://"+url
                 rcheck = requests.get(url,timeout=timeout)
                 if int(rcheck.status_code) in [200,201,202,203,204,205,206,207,208]:
-                        print(f"{SUCESS} {url} : {rcheck.status_code}")
+                        print(f"{SUCESS} {PURPLE}{rcheck.status_code}{DEFAULT} : {url}")
                 else:
-                        print(f"{WARNING} {url} : {rcheck.status_code}")
+                        print(f"{WARNING} {PURPLE}{rcheck.status_code}{DEFAULT} : {url}")
                 server = rcheck.headers.get("Server")
                 print(f"{INFO} Server : {PURPLE}{server}{DEFAULT}")
         except Exception as e:
@@ -248,17 +251,15 @@ def scan_general(url,timeout,param,tor_onion):
                 pass
         
         if not url.startswith("https://") or url.startswith("http://"):
-                urlpaths = "https://"+url+"/"
-        elif not url.endswith("/") and url.startswith("https://") or url.startswith("http://"):
-                urlpaths = url+"/"
+                urlpaths = "https://"+url
 
         testxss = "?q=3211123test"
         
-        v_paths = [".git",".env","phpinfo.php","wp-admin","administrator",
-                   "admin.php","backup.zip","db.sql","config.php",".svn",
-                   ".DS_store",".gitignore",".htpasswd",".htaccess","index.php",
-                   "admin","cpanel","login","dashboard","server-info","phpmyadmin",
-                   "wp-config.php","etc/shadow","api","wp-login.php"]
+        v_paths = ["/.git","/.env","/phpinfo.php","/wp-admin","/administrator",
+                   "/admin.php","/backup.zip","/db.sql","/config.php","/.svn",
+                   "/.DS_store","/.gitignore","/.htpasswd","/.htaccess","/index.php",
+                   "/admin","/cpanel","/login","/dashboard","/server-info","/phpmyadmin",
+                   "/wp-config.php","/etc/shadow","/api","/wp-login.php"]
 
         security_headers = ["Content-Security-Policy",
                             "X-Frame-Options",
@@ -448,9 +449,7 @@ def fuzz(fuzzing, wordlist, maxthreads, timeout,rotate_headers,rotate_proxies,ve
         success_urls = []
         
         if not fuzzing.startswith("https://") or fuzzing.startswith("http://"):
-                url = "https://"+fuzzing+"/"
-        elif not url.endswith("/") and url.startswith("https://") or url.startswith("http://"):
-                url = fuzzing+"/"
+                url = "https://"+fuzzing
 
         connection(url,timeout)
         
@@ -806,3 +805,4 @@ def bruteforce_1wordlists(data,login_url,wordlist,errormsg,maxthreads,timeout,ro
 
 if __name__ == "__main__":
     main()
+
