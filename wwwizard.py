@@ -252,6 +252,8 @@ def scan_general(url,timeout,param,tor_onion):
         
         if not url.startswith("https://") or url.startswith("http://"):
                 urlpaths = "https://"+url
+        else:
+                urlpaths = url
 
         testxss = "?q=3211123test"
         
@@ -450,6 +452,8 @@ def fuzz(fuzzing, wordlist, maxthreads, timeout,rotate_headers,rotate_proxies,ve
         
         if not fuzzing.startswith("https://") or fuzzing.startswith("http://"):
                 url = "https://"+fuzzing
+        else:
+                url = fuzzing
 
         connection(url,timeout)
         
@@ -805,4 +809,5 @@ def bruteforce_1wordlists(data,login_url,wordlist,errormsg,maxthreads,timeout,ro
 
 if __name__ == "__main__":
     main()
+
 
